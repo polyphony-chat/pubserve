@@ -6,10 +6,10 @@ edition = "2021"
 authors = ["bitfl0wer <flori@polyphony.chat>"]
 description = "Simple, generic observer trait."
 keywords = ["observer"]
+rust-version = "1.61"
 
 [lib]
 doctest = false
-crate-type = ["lib", "rlib", "cdylib", "staticlib"]
 
 [features]
 default = []
