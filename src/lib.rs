@@ -56,6 +56,7 @@ pub trait Subscriber<T> {
 /// let mut publisher = Publisher::<String>::new();
 /// publisher.publish("Hello, World!".to_string()); // .await, if async feature is enabled
 /// ```
+#[derive(Clone)]
 pub struct Publisher<T> {
     subscribers: Vec<ReferenceCounted<dyn Subscriber<T>>>,
 }
@@ -65,6 +66,19 @@ impl<T> Debug for Publisher<T> {
         f.debug_struct("Publisher")
             .field("subscribers", &self.subscribers.len())
             .finish()
+    }
+}
+
+impl<T> PartialEq for Publisher<T> {
+    fn eq(&self, other: &Self) -> bool {
+        for (own_subscriber, other_subscriber) in
+            self.subscribers.iter().zip(other.subscribers.iter())
+        {
+            if !ReferenceCounted::ptr_eq(own_subscriber, other_subscriber) {
+                return false;
+            }
+        }
+        true
     }
 }
 
