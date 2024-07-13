@@ -53,7 +53,7 @@ pub trait Subscriber<T> {
 /// ```
 /// use spectra::Publisher;
 /// let mut publisher = Publisher::<String>::new();
-/// publisher.publish("Hello, World!".to_string());
+/// publisher.publish("Hello, World!".to_string()); // .await, if async feature is enabled
 /// ```
 pub struct Publisher<T> {
     subscribers: Vec<ReferenceCounted<dyn Subscriber<T>>>,
@@ -82,6 +82,12 @@ impl<T> Publisher<T> {
     /// when the Publisher sends a message.
     ///
     /// ## Example
+    ///
+    /// The example assumes that the `async` feature is not enabled. If you have enabled the `async`
+    /// feature, you have to add `#[async_trait]` to the `Subscriber` trait impl and `async` to the
+    /// `update` method, as well as `.await`ing the `publish` method. Otherwise, the example is
+    /// identical.
+    ///
     /// ```
     /// use spectra::{Publisher, Subscriber};
     ///
@@ -122,6 +128,12 @@ impl<T> Publisher<T> {
     /// that was added to the list.
     ///
     /// ## Example
+    ///
+    /// The example assumes that the `async` feature is not enabled. If you have enabled the `async`
+    /// feature, you have to add `#[async_trait]` to the `Subscriber` trait impl and `async` to the
+    /// `update` method, as well as `.await`ing the `publish` method. Otherwise, the example is
+    /// identical.
+    ///
     /// ```
     /// use spectra::{Publisher, Subscriber};
     ///
