@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+use std::fmt::Debug;
 #[cfg(not(feature = "send"))]
 use std::rc::Rc;
 #[cfg(not(feature = "send"))]
@@ -57,6 +58,14 @@ pub trait Subscriber<T> {
 /// ```
 pub struct Publisher<T> {
     subscribers: Vec<ReferenceCounted<dyn Subscriber<T>>>,
+}
+
+impl<T> Debug for Publisher<T> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Publisher")
+            .field("subscribers", &self.subscribers.len())
+            .finish()
+    }
 }
 
 impl<T> std::default::Default for Publisher<T> {
