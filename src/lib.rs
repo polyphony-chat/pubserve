@@ -208,7 +208,6 @@ fn test_publisher() {
 #[tokio::test]
 async fn test_publisher() {
     struct MySubscriber;
-    #[cfg(not(feature = "send"))]
     #[async_trait::async_trait]
     impl Subscriber<String> for MySubscriber {
         async fn update(&self, message: &String) {
