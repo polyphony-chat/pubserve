@@ -20,9 +20,9 @@ use spectra::Subscriber;
 struct MySubscriber;
 
 impl Subscriber<i32> for MySubscriber {
-    fn update(&self, data: &i32) {
+    fn update(&self, message: &i32) {
         // Do whatever you want with the data!
-        println!("Received data: {}", data);
+        println!("Received data: {}", message);
     }
 }
 ```
@@ -59,10 +59,10 @@ same `Publisher`. All of them will be notified immediately when data is publishe
 
 No features are enabled by default. The following features are available:
 
-| Feature | Description                                                                                                          |
-| ------- | -------------------------------------------------------------------------------------------------------------------- |
-| `send`  | Makes the `Subscriber` trait `Send` and thus thread-safe.                                                            |
-| `async` | Makes the `Subscriber` trait `Sync` and `async` via the [`async_trait` crate](https://crates.io/crates/async-trait). |
+| Feature | Description                                                                                                                                                                         |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `send`  | Makes the `Subscriber` trait `Send` and thus thread-safe.                                                                                                                           |
+| `async` | Makes the `Subscriber` trait `Sync` and `async` via the [`async_trait` crate](https://crates.io/crates/async-trait). Additionally, makes the publishing method `async` by extension |
 
 The `send` and `async` features can both be enabled at the same time, but do not have to be, should
 you only need one of them.
