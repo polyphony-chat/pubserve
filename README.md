@@ -1,13 +1,15 @@
-# spectra
+# pubserve
+
+> Publish and observe.
 
 Simple, generic observer pattern implementation for Rust.
 
 ## Usage
 
-spectra is really simple to use. Start by creating a `Publisher` for your data type:
+pubserve is really simple to use. Start by creating a `Publisher` for your data type:
 
 ```rust
-use spectra::Publisher;
+use pubserve::Publisher;
 
 let publisher = Publisher::<i32>::new();
 ```
@@ -15,7 +17,7 @@ let publisher = Publisher::<i32>::new();
 Then, create a subscriber that will listen to the publisher:
 
 ```rust
-use spectra::Subscriber;
+use pubserve::Subscriber;
 
 struct MySubscriber;
 
@@ -30,7 +32,7 @@ impl Subscriber<i32> for MySubscriber {
 Finally, subscribe the observer to the publisher:
 
 ```rust
-use spectra::ReferenceCounted;
+use pubserve::ReferenceCounted;
 
 let observer = MySubscriber;
 let reference = ReferenceCounted::new(&observer);

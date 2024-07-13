@@ -51,7 +51,7 @@ pub trait Subscriber<T> {
 ///
 /// # Example
 /// ```
-/// use spectra::Publisher;
+/// use pubserve::Publisher;
 /// let mut publisher = Publisher::<String>::new();
 /// publisher.publish("Hello, World!".to_string()); // .await, if async feature is enabled
 /// ```
@@ -89,7 +89,7 @@ impl<T> Publisher<T> {
     /// identical.
     ///
     /// ```
-    /// use spectra::{Publisher, Subscriber};
+    /// use pubserve::{Publisher, Subscriber};
     ///
     /// struct MySubscriber;
     ///
@@ -102,7 +102,7 @@ impl<T> Publisher<T> {
     ///
     /// let mut publisher = Publisher::<String>::new();
     /// let subscriber = MySubscriber;
-    /// let rc_subscriber = spectra::ReferenceCounted::new(subscriber);
+    /// let rc_subscriber = pubserve::ReferenceCounted::new(subscriber);
     /// publisher.subscribe(rc_subscriber.clone());
     /// // This will print "Received this message: Hello, World!"
     /// publisher.publish("Hello, World!".to_string());
@@ -113,7 +113,7 @@ impl<T> Publisher<T> {
     /// // The following subscribing/unsubscribing will NOT work. If you do not understand why,
     /// // please read up on how reference counting works in Rust.
     /// publisher.subscribe(rc_subscriber.clone());
-    /// publisher.unsubscribe(spectra::ReferenceCounted::new(MySubscriber));
+    /// publisher.unsubscribe(pubserve::ReferenceCounted::new(MySubscriber));
     /// ```
     pub fn subscribe(&mut self, subscriber: ReferenceCounted<dyn Subscriber<T>>) {
         self.subscribers.push(subscriber);
@@ -135,7 +135,7 @@ impl<T> Publisher<T> {
     /// identical.
     ///
     /// ```
-    /// use spectra::{Publisher, Subscriber};
+    /// use pubserve::{Publisher, Subscriber};
     ///
     /// struct MySubscriber;
     ///
@@ -148,7 +148,7 @@ impl<T> Publisher<T> {
     ///
     /// let mut publisher = Publisher::<String>::new();
     /// let subscriber = MySubscriber;
-    /// let rc_subscriber = spectra::ReferenceCounted::new(subscriber);
+    /// let rc_subscriber = pubserve::ReferenceCounted::new(subscriber);
     /// publisher.subscribe(rc_subscriber.clone());
     /// // This will print "Received this message: Hello, World!"
     /// publisher.publish("Hello, World!".to_string());
@@ -159,7 +159,7 @@ impl<T> Publisher<T> {
     /// // The following subscribing/unsubscribing will NOT work. If you do not understand why,
     /// // please read up on how reference counting works in Rust.
     /// publisher.subscribe(rc_subscriber.clone());
-    /// publisher.unsubscribe(spectra::ReferenceCounted::new(MySubscriber));
+    /// publisher.unsubscribe(pubserve::ReferenceCounted::new(MySubscriber));
     /// ```
     pub fn unsubscribe(&mut self, subscriber: ReferenceCounted<dyn Subscriber<T>>) {
         self.subscribers
