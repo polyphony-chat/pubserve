@@ -66,3 +66,8 @@ No features are enabled by default. The following features are available:
 
 The `send` and `async` features can both be enabled at the same time, but do not have to be, should
 you only need one of them.
+
+## License
+
+This project is licensed under the MPL-2.0 license. See the [LICENSE](LICENSE) file for more information.
+By committing to this repository, you agree to license your contributions under the MPL-2.0 license.
